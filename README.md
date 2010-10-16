@@ -43,5 +43,5 @@ Once you have done this, you can create your own heroku application with this sc
 
 		To git@heroku.com:random_application_subdomain.git
 		 * [new branch]      master -> master
-1. now check the host that was created by heroku (I called it http://random_application_subdomain.heroku.com above) to see your application running		
+1. now check the host that was created by heroku to see your application running (I called the host http://random_application_subdomain.heroku.com in the example above) 
 		
