@@ -17,10 +17,10 @@
 	mdgs['mdg_2'] = Array(0, "Achieve universal primary education");
 	mdgs['mdg_3'] = Array(0, "Promote gender equality and empower women");
 	mdgs['mdg_4'] = Array(0, "Reduce child mortality");
-	mdgs['mdg_5'] = Array(0, "Improve maternal health");
-	mdgs['mdg_6'] = Array(0, "Combat HIV AIDS, malaria, and other diseases");
-	mdgs['mdg_7'] = Array(0, "Ensure environmental sustainability");
-	mdgs['mdg_8'] = Array(0, "Develop a global partnership for development");
+	// mdgs['mdg_5'] = Array(0, "Improve maternal health");
+	// mdgs['mdg_6'] = Array(0, "Combat HIV AIDS, malaria, and other diseases");
+	// mdgs['mdg_7'] = Array(0, "Ensure environmental sustainability");
+	// mdgs['mdg_8'] = Array(0, "Develop a global partnership for development");
 	
 	function query_for_mdg(mdg_id) {
 		// Create new YUI instance, and populate it with the required modules
@@ -28,7 +28,7 @@
 			
 			var yql_query = 'SELECT * FROM search.web(' + mdgs[mdg_id][0] + ',' + results_per_msg + ') WHERE query="' + mdgs[mdg_id][1] + '"';
 			var target_div = "#" + mdg_id + "_results";
-			// console.log(yql_query);
+			console.log(yql_query);
 			// console.log(target_div);
 
 			Y.YQL(yql_query, function(response) {	
@@ -36,11 +36,6 @@
 				Y.each(response.query.results.result, function(result) {
 		            Y.one(target_div).append(style_results(result));
 		        });
-
-				// results = response.query.results.result;
-				// for ( i = 0; i < results.length; i++ ) {
-				//                 Y.one('#results').append(results[i].abstract + " <br/>");
-				//             }
 		    });
 		
 			// increase the offset for the next round
@@ -58,12 +53,12 @@
 		return styled_result;
 	}
 	
-	function create_mdg_box(mdg_id) {
-		// mdg_box  = '<h2>' ++ 1. Eradicate extreme poverty and hunger</h2>';
-		// 
-		// <div class="result_box" id="mdg_1_results">
-		// </div>
-	}
+	// function create_mdg_box(mdg_id) {
+	// 	// mdg_box  = '<h2>' ++ 1. Eradicate extreme poverty and hunger</h2>';
+	// 	// 
+	// 	// <div class="result_box" id="mdg_1_results">
+	// 	// </div>
+	// }
 	
 	// create random delay
 	function generate_random_delay(){
@@ -95,9 +90,9 @@
 	// query_for_mdg("mdg_8");
 	
 	// initialize the randomness of news reloads
-	YUI().use('yql','node', function(Y) {
-		Y.later(10000, null, fill_mdgs_with_articles, null, true);
-	});
+	// YUI().use('yql','node', function(Y) {
+	// 	Y.later(10000, null, fill_mdgs_with_articles, null, true);
+	// });
 	</script>
 
 </head>
@@ -109,9 +104,6 @@
 		<div id="description">
 			Search results for the objectives of the <a href="http://www.worldbank.org/mdgs">Millenium Development Goals</a>. Please support <a href="http://www.worldbank.org/">The World Bank</a> in any way you can. If you are a developer, take part in the <a href="http://appsfordevelopment.challengepost.com">Apps for Development</a> content. Raise awareness, be active.
 		</div>
-		
-		<!-- <div id="mdgs_box">
-		</div> -->
 	
 		<h2>1. Eradicate extreme poverty and hunger</h2>
 		<div class="result_box" id="mdg_1_results">
