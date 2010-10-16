@@ -1,7 +1,0 @@
-Heroku Sinatra Scaffold
-=========================
-
-I use this as a starting point when developing a prototype with sinatra/ruby that I want to run on heroku.
-
-For more about Heroku see <http://heroku.com>.
-For more about Sinatra see <http://www.sinatrarb.com/>.
