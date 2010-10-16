@@ -1,8 +1,139 @@
 <html>
 <head>
-	<title>Heroku Sinatra Scaffold</title>
+	<title>WorldBank Millenium Development Goals</title>	
+	<link type='text/css' rel='stylesheet' href='/styles.css' />
+	<script type="text/javascript" charset="utf-8" src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js"></script>
+	
+	<!-- google fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Nobile&subset=latin' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Reenie+Beanie&subset=latin' rel='stylesheet' type='text/css'>
+	
+	<script type="text/javascript" charset="utf-8">
+	
+	results_per_msg = 3;
+	
+	mdgs = Array();
+	mdgs['mdg_1'] = Array(0, "Eradicate extreme poverty and hunger");
+	mdgs['mdg_2'] = Array(0, "Achieve universal primary education");
+	mdgs['mdg_3'] = Array(0, "Promote gender equality and empower women");
+	mdgs['mdg_4'] = Array(0, "Reduce child mortality");
+	// MDG = [
+	//   "Eradicate extreme poverty and hunger",
+	//   "Achieve universal primary education",
+	//   "Promote gender equality and empower women",
+	//   "Reduce child mortality",
+	//   "Improve maternal health",
+	//   "Combat HIV/AIDS, malaria, and other diseases",
+	//   "Ensure environmental sustainability",
+	//   "Develop a global partnership for development"
+	// ]	
+	
+	function query_for_mdg(mdg_id) {
+		// Create new YUI instance, and populate it with the required modules
+		YUI().use('yql','node', function(Y) {
+			
+			var yql_query = 'SELECT * FROM search.web(' + mdgs[mdg_id][0] + ',' + results_per_msg + ') WHERE query="' + mdgs[mdg_id][1] + '"';
+			var target_div = "#" + mdg_id + "_results";
+			// console.log(yql_query);
+			// console.log(target_div);
+
+			Y.YQL(yql_query, function(response) {	
+				Y.one(target_div).get('childNodes').remove();		
+				Y.each(response.query.results.result, function(result) {
+		            Y.one(target_div).append(style_results(result));
+		        });
+
+				// results = response.query.results.result;
+				// for ( i = 0; i < results.length; i++ ) {
+				//                 Y.one('#results').append(results[i].abstract + " <br/>");
+				//             }
+		    });
+		
+			// increase the offset for the next round
+			mdgs[mdg_id][0] = mdgs[mdg_id][0] + results_per_msg;
+		});
+	}
+	
+	// create the layouted box for one rearch result as retrieved from Yahoo BOSS
+	function style_results(result){
+		styled_result  = '<div class="result">';
+		styled_result += '<a href="' + result.url +'">' + result.title + '</a> (' + result.date + ')  <br />';
+		styled_result += '<span class="keywords">Keywords: <i> KEYTERMS </i> </span> <br />';
+		styled_result += '<span class="abstract">' + result.abstract + '</span>';
+		styled_result += '</div>';
+		return styled_result;
+	}
+	
+	function create_mdg_box(mdg_id) {
+		// mdg_box  = '<h2>' ++ 1. Eradicate extreme poverty and hunger</h2>';
+		// 
+		// <div class="result_box" id="mdg_1_results">
+		// </div>
+	}
+	
+	// create random delay
+	function generate_random_delay(){
+		random_number = 6 + Math.round(Math.random() * 10000);
+		return random_number;
+	}
+	
+	function fill_mdgs_with_articles() {
+		YUI().use('yql','node', function(Y) {
+			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_1"), false);
+			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_2"), false);
+			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_3"), false);
+			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_4"), false);
+		});	
+	}
+	
+	// fill all news boxes with an initial set of news
+	query_for_mdg("mdg_1");
+	query_for_mdg("mdg_2");
+	query_for_mdg("mdg_3");
+	query_for_mdg("mdg_4");
+	
+	// initialize the randomness of news reloads
+	YUI().use('yql','node', function(Y) {
+		Y.later(10000, null, fill_mdgs_with_articles, null, true);
+	});
+	</script>
+
 </head>
 <body>
-	<h1>Heroku Sinatra Scaffold</h1>
+	
+	<div id='container'>		
+		<h1>WorldBank Millenium Development Goals</h1>
+		
+		<div id="description">
+			Search results for the objectives of the <a href="http://www.worldbank.org/mdgs">Millenium Development Goals</a>. Please support <a href="http://www.worldbank.org/">The World Bank</a> in any way you can. If you are a developer, take part in the <a href="http://appsfordevelopment.challengepost.com">Apps for Development</a> content. Raise awareness, be active.
+		</div>
+		
+		<!-- <div id="mdgs_box">
+		</div> -->
+	
+		<h2>1. Eradicate extreme poverty and hunger</h2>
+		<div class="result_box" id="mdg_1_results">
+		</div>	
+	
+		<h2>2. Achieve universal primary education</h2>
+		<div class="result_box" id="mdg_2_results">
+		</div>
+		
+		<h2>3. Promote gender equality and empower women</h2>
+		<div class="result_box" id="mdg_3_results">
+		</div>
+		
+		<h2>4. Reduce child mortality</h2>
+		<div class="result_box" id="mdg_4_results">
+		</div>
+		
+		<div style="text-align:right;">	
+			Please support <a href="http://appsfordevelopment.challengepost.com">Apps for Development</a> and
+			<a href="http://www.worldbank.org/">The World Bank</a>.
+			&copy; 2010 <a href="http://twitter.com/#!/sebastianspier">Sebastian Spier</a> 
+		</div>
+	
+	</div>
+
 </body>
 </html>
