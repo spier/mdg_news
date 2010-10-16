@@ -1,0 +1,77 @@
+body {
+  	background-color: 	#FFF;
+	font-family: 		'Nobile', arial, serif;
+  	font-size: 			14px;
+	margin: 			10px;
+}
+
+/* overwrites the fonts from jQuery UI */
+.ui-widget { 
+	font-family: 'Nobile', arial, serif !important;
+}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { 
+	font-family: 'Nobile', arial, serif !important;
+}
+
+#container {
+  	width: 972px;
+  	margin: 0 auto;
+/*	background-color: #00457C;*/
+/*	border: 1px solid red;*/
+}
+
+h1 {
+	font-family: 'Reenie Beanie', arial, serif;
+	font-size: 3em;
+	text-align: center;
+}
+
+h3 {
+	padding: 12px;
+	text-decoration: underline;
+/*	border: 2px solid blue;*/
+}
+
+#description{
+	font-family: 'Reenie Beanie', arial, serif;
+	font-size: 2em;
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.result_box {
+	float:left; 
+}
+
+.result{
+	width: 		300px; 
+	height: 	160px; 
+	padding: 	12px;
+	float:		left; 
+	text-align:	justify;
+}
+
+.result .abstract {
+	font-size:	0.9em;
+}
+
+.result .keywords {
+	font-size:	0.7em;
+}
+
+.highlight{
+	background: #CFD4D8;
+	cursor: 	hand;
+}
+
+a {
+	text-decoration: none;
+	outline: none; /* disable mozilla's dotted box around link */
+	font-weight:bold;
+	color: #0096D7;
+}
+a:hover {
+	text-decoration: none;
+	color: #6A737B;
+}
