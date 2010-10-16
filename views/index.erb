@@ -17,16 +17,10 @@
 	mdgs['mdg_2'] = Array(0, "Achieve universal primary education");
 	mdgs['mdg_3'] = Array(0, "Promote gender equality and empower women");
 	mdgs['mdg_4'] = Array(0, "Reduce child mortality");
-	// MDG = [
-	//   "Eradicate extreme poverty and hunger",
-	//   "Achieve universal primary education",
-	//   "Promote gender equality and empower women",
-	//   "Reduce child mortality",
-	//   "Improve maternal health",
-	//   "Combat HIV/AIDS, malaria, and other diseases",
-	//   "Ensure environmental sustainability",
-	//   "Develop a global partnership for development"
-	// ]	
+	mdgs['mdg_5'] = Array(0, "Improve maternal health");
+	mdgs['mdg_6'] = Array(0, "Combat HIV AIDS, malaria, and other diseases");
+	mdgs['mdg_7'] = Array(0, "Ensure environmental sustainability");
+	mdgs['mdg_8'] = Array(0, "Develop a global partnership for development");
 	
 	function query_for_mdg(mdg_id) {
 		// Create new YUI instance, and populate it with the required modules
@@ -83,6 +77,10 @@
 			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_2"), false);
 			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_3"), false);
 			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_4"), false);
+			// Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_5"), false);
+			// Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_6"), false);
+			// Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_7"), false);
+			// Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_8"), false);
 		});	
 	}
 	
@@ -91,6 +89,10 @@
 	query_for_mdg("mdg_2");
 	query_for_mdg("mdg_3");
 	query_for_mdg("mdg_4");
+	// query_for_mdg("mdg_5");
+	// query_for_mdg("mdg_6");
+	// query_for_mdg("mdg_7");
+	// query_for_mdg("mdg_8");
 	
 	// initialize the randomness of news reloads
 	YUI().use('yql','node', function(Y) {
@@ -126,6 +128,22 @@
 		<h2>4. Reduce child mortality</h2>
 		<div class="result_box" id="mdg_4_results">
 		</div>
+		
+		<h2>5. Improve maternal health</h2>
+		<div class="result_box" id="mdg_5_results">
+		</div>
+		
+		<h2>6. Combat HIV/AIDS, malaria, and other disease</h2>
+		<div class="result_box" id="mdg_6_results">
+		</div>
+		
+		<h2>7. Ensure environmental sustainability</h2>
+		<div class="result_box" id="mdg_7_results">
+		</div>
+		
+		<h2>8. Develop a global partnership for development</h2>
+		<div class="result_box" id="mdg_8_results">
+		</div>								
 		
 		<div style="text-align:right;">	
 			Please support <a href="http://appsfordevelopment.challengepost.com">Apps for Development</a> and
