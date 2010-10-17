@@ -17,10 +17,10 @@
 	mdgs['mdg_2'] = Array(0, "Achieve universal primary education");
 	mdgs['mdg_3'] = Array(0, "Promote gender equality and empower women");
 	mdgs['mdg_4'] = Array(0, "Reduce child mortality");
-	// mdgs['mdg_5'] = Array(0, "Improve maternal health");
-	// mdgs['mdg_6'] = Array(0, "Combat HIV AIDS, malaria, and other diseases");
-	// mdgs['mdg_7'] = Array(0, "Ensure environmental sustainability");
-	// mdgs['mdg_8'] = Array(0, "Develop a global partnership for development");
+	mdgs['mdg_5'] = Array(0, "Improve maternal health");
+	mdgs['mdg_6'] = Array(0, "Combat HIV AIDS, malaria, and other diseases");
+	mdgs['mdg_7'] = Array(0, "Ensure environmental sustainability");
+	mdgs['mdg_8'] = Array(0, "Develop a global partnership for development");
 	
 	function query_for_mdg(mdg_id) {
 		// Create new YUI instance, and populate it with the required modules
@@ -62,7 +62,7 @@
 	
 	// create random delay
 	function generate_random_delay(){
-		random_number = 6 + Math.round(Math.random() * 10000);
+		random_number = 20 + Math.round(Math.random() * 10000);
 		return random_number;
 	}
 	
@@ -72,10 +72,10 @@
 			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_2"), false);
 			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_3"), false);
 			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_4"), false);
-			// Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_5"), false);
-			// Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_6"), false);
-			// Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_7"), false);
-			// Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_8"), false);
+			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_5"), false);
+			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_6"), false);
+			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_7"), false);
+			Y.later(generate_random_delay(), null, query_for_mdg, Array("mdg_8"), false);
 		});	
 	}
 	
@@ -84,15 +84,15 @@
 	query_for_mdg("mdg_2");
 	query_for_mdg("mdg_3");
 	query_for_mdg("mdg_4");
-	// query_for_mdg("mdg_5");
-	// query_for_mdg("mdg_6");
-	// query_for_mdg("mdg_7");
-	// query_for_mdg("mdg_8");
+	query_for_mdg("mdg_5");
+	query_for_mdg("mdg_6");
+	query_for_mdg("mdg_7");
+	query_for_mdg("mdg_8");
 	
 	// initialize the randomness of news reloads
-	// YUI().use('yql','node', function(Y) {
-	// 	Y.later(10000, null, fill_mdgs_with_articles, null, true);
-	// });
+	YUI().use('yql','node', function(Y) {
+		Y.later(30000, null, fill_mdgs_with_articles, null, true);
+	});
 	</script>
 
 </head>
