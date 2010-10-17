@@ -13,53 +13,71 @@
 	results_per_msg = 3;
 	
 	mdgs = Array();
-	mdgs['mdg_1'] = Array(0, "Eradicate extreme poverty and hunger");
-	mdgs['mdg_2'] = Array(0, "Achieve universal primary education");
-	mdgs['mdg_3'] = Array(0, "Promote gender equality and empower women");
-	mdgs['mdg_4'] = Array(0, "Reduce child mortality");
-	mdgs['mdg_5'] = Array(0, "Improve maternal health");
-	mdgs['mdg_6'] = Array(0, "Combat HIV AIDS, malaria, and other diseases");
-	mdgs['mdg_7'] = Array(0, "Ensure environmental sustainability");
-	mdgs['mdg_8'] = Array(0, "Develop a global partnership for development");
+	// skip the first 50 results to drill down to some more rare/obscure results
+	mdgs['mdg_1'] = Array(50, "Eradicate extreme poverty and hunger");
+	mdgs['mdg_2'] = Array(50, "Achieve universal primary education");
+	mdgs['mdg_3'] = Array(50, "Promote gender equality and empower women");
+	mdgs['mdg_4'] = Array(50, "Reduce child mortality");
+	mdgs['mdg_5'] = Array(50, "Improve maternal health");
+	mdgs['mdg_6'] = Array(50, "Combat HIV AIDS, malaria, and other diseases");
+	mdgs['mdg_7'] = Array(50, "Ensure environmental sustainability");
+	mdgs['mdg_8'] = Array(50, "Develop a global partnership for development");
 	
+	
+	// https://developer.yahoo.com/yui/3/examples/yql/yql-oauth.html
+	// key and secret for oAuth of application from https://developer.apps.yahoo.com/projects
 	function query_for_mdg(mdg_id) {
-		// Create new YUI instance, and populate it with the required modules
-		YUI().use('yql','node', function(Y) {
-			
-			var yql_query = 'SELECT * FROM search.web(' + mdgs[mdg_id][0] + ',' + results_per_msg + ') WHERE query="' + mdgs[mdg_id][1] + '"';
-			var target_div = "#" + mdg_id + "_results";
-			// console.log(yql_query);
-			// console.log(target_div);
+		YUI({ gallery: 'gallery-2010.08.11-20-39' }).use('node', 'yql', 'gallery-oauth', function(Y) {    
 
-			Y.YQL(yql_query, function(response) {	
-				Y.one(target_div).get('childNodes').remove();		
-				Y.each(response.query.results.result, function(result) {
-		            Y.one(target_div).append(style_results(result));
+		    //Using with YQL oAuth Gallery module
+		    Y.oAuth.ready(function() {
+			
+			// // Create new YUI instance, and populate it with the required modules
+			// YUI().use('yql','node', function(Y) {
+				
+				// build the query. exluce some common domains that appear too often to make it more interesting
+				var yql_query = 'SELECT * FROM search.web(' + mdgs[mdg_id][0] + ',' + 10 + ') WHERE query="' + mdgs[mdg_id][1] + '"' + " AND view='keyterms' AND url NOT MATCHES '.*(worldbank.org|undp|unicef).*' LIMIT "+ results_per_msg +" | unique(field='url')";
+				var target_div = "#" + mdg_id + "_results";
+				// console.log(yql_query);
+				// console.log(target_div);
+
+				Y.YQL(yql_query, function(response) {	
+					Y.one(target_div).get('childNodes').remove();		
+					Y.each(response.query.results.result, function(result) {
+			            Y.one(target_div).append(style_results(result));
+			        });
+			    }, {
+					key: 'dj0yJmk9QWpTNFZ0V1kzUm9aJmQ9WVdrOU5FWndjM2RDTkdFbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD04MA--', 
+		            secret: 'de7c1e5af73001498e926bc9ef1659b770524c25',
+		            base: '://query.yahooapis.com/v1/yql?'
 		        });
-		    });
 		
-			// increase the offset for the next round
-			mdgs[mdg_id][0] = mdgs[mdg_id][0] + results_per_msg;
-		});
+				// increase the offset for the next round
+				mdgs[mdg_id][0] = mdgs[mdg_id][0] + results_per_msg;
+			// });
+		    });
+
+		});	
 	}
 	
 	// create the layouted box for one rearch result as retrieved from Yahoo BOSS
 	function style_results(result){
-		console.log(result);
+		// console.log(result);
+		my_keyterms = Array();
+		if (result.keyterms.terms.term != null) {
+			for (var i = 0; i < result.keyterms.terms.term.length && i < 5; i++) {
+			   my_keyterms[my_keyterms.length] = result.keyterms.terms.term[i];
+			}
+		}
+		my_keyterms = my_keyterms.join(", ");
+		// console.log(my_keyterms);
 		styled_result  = '<div class="result">';
 		styled_result += '<a href="' + result.url +'">' + result.title + '</a> (' + result.date + ')  <br />';
-		styled_result += '<span class="keywords">Keywords: <i> KEYTERMS </i> </span> <br />';
+		styled_result += '<span class="keywords">Keywords: <i> '+ my_keyterms +' </i> </span> <br />';
 		styled_result += '<span class="abstract">' + result.abstract + '</span>';
 		styled_result += '</div>';
 		return styled_result;
 	}
-	
-	// function create_mdg_box(mdg_id) {
-	// 	// mdg_box  = '<h2>' ++ 1. Eradicate extreme poverty and hunger</h2>';
-	// 	// 
-	// 	// <div class="result_box" id="mdg_1_results">
-	// 	// </div>
-	// }
 	
 	// create random delay
 	function generate_random_delay(){
@@ -91,9 +109,9 @@
 	query_for_mdg("mdg_8");
 	
 	// initialize the randomness of news reloads
-	// YUI().use('yql','node', function(Y) {
-	// 	Y.later(30000, null, fill_mdgs_with_articles, null, true);
-	// });
+	YUI().use('yql','node', function(Y) {
+		Y.later(30000, null, fill_mdgs_with_articles, null, true);
+	});
 	</script>
 
 </head>
@@ -103,7 +121,7 @@
 		<h1>WorldBank Millenium Development Goals</h1>
 		
 		<div id="description">
-			Search results for the objectives of the <a href="http://www.worldbank.org/mdgs">Millenium Development Goals</a>. Please support <a href="http://www.worldbank.org/">The World Bank</a> in any way you can. If you are a developer, take part in the <a href="http://appsfordevelopment.challengepost.com">Apps for Development</a> content. Raise awareness, be active.
+			Automatically updating search results for the <a href="http://www.worldbank.org/mdgs">Millenium Development Goals</a>. Please support <a href="http://www.worldbank.org/">The World Bank</a> in any way you can. If you are a developer, take part in the <a href="http://appsfordevelopment.challengepost.com">Apps for Development</a> content. Raise awareness, be active.
 		</div>
 	
 		<h2>1. Eradicate extreme poverty and hunger</h2>
