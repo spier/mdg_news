@@ -28,7 +28,7 @@
 			
 			var yql_query = 'SELECT * FROM search.web(' + mdgs[mdg_id][0] + ',' + results_per_msg + ') WHERE query="' + mdgs[mdg_id][1] + '"';
 			var target_div = "#" + mdg_id + "_results";
-			console.log(yql_query);
+			// console.log(yql_query);
 			// console.log(target_div);
 
 			Y.YQL(yql_query, function(response) {	
@@ -45,6 +45,7 @@
 	
 	// create the layouted box for one rearch result as retrieved from Yahoo BOSS
 	function style_results(result){
+		console.log(result);
 		styled_result  = '<div class="result">';
 		styled_result += '<a href="' + result.url +'">' + result.title + '</a> (' + result.date + ')  <br />';
 		styled_result += '<span class="keywords">Keywords: <i> KEYTERMS </i> </span> <br />';
@@ -90,9 +91,9 @@
 	query_for_mdg("mdg_8");
 	
 	// initialize the randomness of news reloads
-	YUI().use('yql','node', function(Y) {
-		Y.later(30000, null, fill_mdgs_with_articles, null, true);
-	});
+	// YUI().use('yql','node', function(Y) {
+	// 	Y.later(30000, null, fill_mdgs_with_articles, null, true);
+	// });
 	</script>
 
 </head>
