@@ -20,6 +20,18 @@ body {
 /*	border: 1px solid red;*/
 }
 
+#country_selection {
+	margin: 0 auto;
+	text-align: center;
+	font-size: 1.3em;
+}
+
+#country_selection * {
+	margin-bottom:20px;
+	margin-top:20px;
+	font-size: 1.3em;
+}
+
 h1 {
 	font-family: 'Reenie Beanie', arial, serif;
 	font-size: 3em;
@@ -32,9 +44,10 @@ h3 {
 /*	border: 2px solid blue;*/
 }
 
-#description{
-	font-family: 'Reenie Beanie', arial, serif;
-	font-size: 2em;
+.description{
+/*	font-family: 'Josefin Sans Std Light', arial, serif;*/
+/*	font-family: 'Reenie Beanie', arial, serif;*/
+	font-size: 1.3em;
 	text-align: center;
 	width: 80%;
 	margin: 0 auto;

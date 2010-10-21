@@ -15,5 +15,6 @@ require 'sinatra'
 # ]
 
 get '/' do
+  # @country = params[:country]
   erb :index
 end
