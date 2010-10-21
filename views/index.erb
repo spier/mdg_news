@@ -53,7 +53,7 @@
 				// build the query. exluce some common domains that appear too often to make it more interesting
 				var yql_query = 'SELECT * FROM search.web(' + mdgs_data[mdg_id][0] + ',' + 10 + ') WHERE query="' + mdgs_data[mdg_id][1] + '"' + " AND view='keyterms' AND url NOT MATCHES '.*(worldbank.org|undp|unicef).*' LIMIT "+ results_per_msg +" | unique(field='url')";
 				var target_div = "#" + mdg_id + "_results";
-				console.log(yql_query);
+				// console.log(yql_query);
 				// console.log(target_div);
 
 				Y.YQL(yql_query, function(response) {	
@@ -139,7 +139,7 @@
 		    function(e) {
 				selected_country = Y.one("#countries").get("value");
 				mdgs_data = init_mdgs(mdgs,selected_country);
-				console.log(selected_country);
+				// console.log(selected_country);
 				start_article_rotation();
 				Y.later(10000, null, fill_mdgs_with_articles, null, true);
 		    }
