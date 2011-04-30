@@ -10,7 +10,7 @@ To make this a technology experiment for myself I used YUI to implement this app
       erb :index
     end
 
-This app is now offline because the old Y! BOSS API became unavailable but here a [screenshot](./mdgnews_screenshot.png) of how the app roughly looked like.
+This app is now offline because the old Y! BOSS API became unavailable but here a [screenshot](mdgnews_screenshot.png) of how the app roughly looked like.
 
 
 
